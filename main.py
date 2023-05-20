@@ -55,18 +55,18 @@ with col2:
 
 st.markdown("## Enter Your Email To Convert")
 
-def get_api_key():
-    input_text = st.text_input(label="Enter Password ",  placeholder="ask Hung Chau", key="openai_api_key_input")
+def get_password():
+    input_text = st.text_input(label="Enter Password ",  placeholder="ask Hung Chau")
     return input_text
 
-import os
+def get_api_key():
+    input_text = st.text_input(label="OpenAI API Key ",  placeholder="Ex: sk-2twmA8tfCb8un4...", key="openai_api_key_input")
+    print(input_text)
+    return input_text
 
-pass_word = get_api_key()
+pass_word = get_password()
 if pass_word=='chau4share':
-	openai_api_key = os.getenv('OPEN_API_KEY')
-	st.text_input(openai_api_key)
-else:
-	openai_api_key = 'error'
+	openai_api_key = get_api_key()
 
 col1, col2 = st.columns(2)
 with col1:
