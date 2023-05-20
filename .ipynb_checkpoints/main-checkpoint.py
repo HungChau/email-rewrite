@@ -42,30 +42,27 @@ def load_LLM(openai_api_key):
     llm = OpenAI(temperature=.7, openai_api_key=openai_api_key)
     return llm
 
-st.set_page_config(page_title="Email Rewrite", page_icon=":robot:")
-st.header("Email Rewrite")
+st.set_page_config(page_title="Globalize Email", page_icon=":robot:")
+st.header("Globalize Text")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown('Try it!!!')
+    st.markdown("Often professionals would like to improve their emails, but don't have the skills to do so. \n\n This tool \
+                will help you improve your email skills by converting your emails into a more professional format. This tool \
+                is powered by [LangChain](https://langchain.com/) and [OpenAI](https://openai.com) and made by \
+                [@GregKamradt](https://twitter.com/GregKamradt). \n\n View Source Code on [Github](https://github.com/gkamradt/globalize-text-streamlit/blob/main/main.py)")
 
 with col2:
-    st.image(image='hung_photo.png', width=500, caption='Hung Chau')
+    st.image(image='TweetScreenshot.png', width=500, caption='https://twitter.com/DannyRichman/status/1598254671591723008')
 
 st.markdown("## Enter Your Email To Convert")
 
 def get_api_key():
-    input_text = st.text_input(label="Enter Password ",  placeholder="ask Hung Chau", key="openai_api_key_input")
+    input_text = st.text_input(label="OpenAI API Key ",  placeholder="Ex: sk-2twmA8tfCb8un4...", key="openai_api_key_input")
     return input_text
 
-import os
-
-pass_word = get_api_key()
-if pass_word=='chau4share':
-	openai_api_key = os.getenv('OPEN_API_KEY')
-else:
-	openai_api_key = 'error'
+openai_api_key = get_api_key()
 
 col1, col2 = st.columns(2)
 with col1:
@@ -90,15 +87,15 @@ if len(email_input.split(" ")) > 700:
 
 def update_text_with_example():
     print ("in updated")
-    st.session_state.email_input = "Hey dude, this is Hung. Can we meet tomorrow?"
+    st.session_state.email_input = "Sally I am starts work at yours monday from dave"
 
 st.button("*See An Example*", type='secondary', help="Click to see an example of the email you will be converting.", on_click=update_text_with_example)
 
 st.markdown("### Your Converted Email:")
 
 if email_input:
-    if openai_api_key=='error':
-        st.warning('Please enter the correct password')
+    if not openai_api_key:
+        st.warning('Please insert OpenAI API Key. Instructions [here](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)', icon="⚠️")
         st.stop()
 
     llm = load_LLM(openai_api_key=openai_api_key)
