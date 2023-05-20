@@ -61,12 +61,12 @@ def get_password():
 
 def get_api_key():
     input_text = st.text_input(label="OpenAI API Key ",  placeholder="Ex: sk-2twmA8tfCb8un4...", key="openai_api_key_input")
-    print(input_text)
+    st.text_input(input_text)
     return input_text
 
 pass_word = get_password()
-if pass_word=='chau4share':
-	openai_api_key = get_api_key()
+if pass_word==st.secrets["app_password"]:
+	openai_api_key = st.secrets["OPEN_API_KEY"]
 
 col1, col2 = st.columns(2)
 with col1:
