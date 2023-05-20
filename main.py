@@ -64,7 +64,6 @@ import os
 pass_word = get_api_key()
 if pass_word=='chau4share':
 	openai_api_key = os.getenv('OPEN_API_KEY')
-	st.text_input(openai_api_key)
 else:
 	openai_api_key = 'error'
 
